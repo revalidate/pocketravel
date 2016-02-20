@@ -1,19 +1,32 @@
+
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @user.name %>
-</p>
+<h1><%= @user.name %>: itinerary for san francisco</h1>
 
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
+<br>
+<div class="dropdown">
+  <button class="btn btn-default dropdown-toggle form-control" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    san francisco, ca
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+    <li><a href="#">san francisco</a></li>
+    <li><a href="#">manhattan, ny</a></li>
+  </ul>
+</div>
 
-<p>
-  <strong>Password:</strong>
-  <%= @user.password %>
-</p>
+<br>
+<br>
+<h3>Blue Bottle Cafe<h3>
+<h5>1 Ferry Bldg, Ste 7, San Francisco, CA 94111</h5>
+<h5>Embarcadero</h5>
+<p>Located inside one of San Francisco’s most recognizable landmarks, this café consists of two coffee bars: The first, located in the main arcade, pulls Hayes Valley Espresso. The north (or “secret”) coffee bar is tucked away around the corner in a side entrance and rotates its espresso offerings between Hayes Valley Espresso and an occasional featured blend or single origin. On both sides, we craft pour-over coffee individually on drip bars of our own design.</p>
+
+<br>
+<h3>Philz Coffee<h3>
+<h5>1 Front St, Ste 100, San Francisco, CA 94111</h5>
+<h5>Financial District</h5>
+<p>We brew every cup “One Cup at a Time", crafting a perfect cup to every individual customer’s taste. You won’t find any lattes, cappuccinos, espressos, or pre-brews. Instead, you'll find over 20 customized blends made from high quality beans from around the world.</p>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
