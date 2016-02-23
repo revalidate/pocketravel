@@ -2,6 +2,12 @@
 <html>
 <head>
   <title>pocketravel</title>
+
+  <!-- VENDOR SCRIPTS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script type="text/javascript" async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_CRp4ht6OFPUChKJC91IF-5uGHCAcRo8&callback=initAutocomplete&libraries=places"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
@@ -10,10 +16,6 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
   <link href="http://www.gardenspotvillagemarathon.org/assets/img/ui/address_icon.png" rel="icon">
-
-  <!-- VENDOR SCRIPTS -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
 </head>
 <body>
@@ -61,7 +63,7 @@
   <div class="container">
     <hr>
     <%= yield %>
-  </div
+  </div>
 
 </body>
 </html>
