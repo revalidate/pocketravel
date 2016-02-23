@@ -24,9 +24,9 @@
 
 #map {
   background-color: blue;
-  /*width: 600px;*/
-  height: 100%;
-  /*margin-left: 300px*/
+  width: 600px;
+  height: 500px;
+  margin-left: 300px
 }
 
 #search {

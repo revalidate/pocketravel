@@ -3,14 +3,14 @@ console.log("this is working");
 function initAutocomplete() {
       var map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: 37.7833, lng: -122.4167},
-        zoom: 12
+        zoom: 12,
+        scrollwheel: false
         // mapTypeId: google.maps.MapTypeId.ROADMAP
       });
 
       // Create the search box and link it to the UI element.
       var input = document.getElementById('searchInput');
       var searchBox = new google.maps.places.SearchBox(input);
-      map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
       // Bias the SearchBox results towards current map's viewport.
       map.addListener('bounds_changed', function() {
@@ -63,3 +63,5 @@ function initAutocomplete() {
         map.fitBounds(bounds);
       });
     }
+
+google.maps.event.addDomListener(window, 'load', initAutocomplete);
