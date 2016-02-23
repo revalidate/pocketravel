@@ -14,14 +14,14 @@
  *= require_self
  */
 
-.search {
+#search {
    width: 300px;
    height: 500px;
    float: left;
    border: solid;
  }
 
-.map {
+#map {
   background-color: blue;
   width: 600px;
   height: 500px;
