@@ -1,5 +1,7 @@
 console.log("this is working");
 
+var markers = [];
+
 function initAutocomplete() {
       var map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: 37.7833, lng: -122.4167},
@@ -18,7 +20,7 @@ function initAutocomplete() {
       });
 
 
-      var markers = [];
+      markers = [];
       // Listen for the event fired when the user selects a prediction and retrieve
       // more details for that place.
       searchBox.addListener('places_changed', function() {
@@ -53,6 +55,8 @@ function initAutocomplete() {
             position: place.geometry.location
           }));
 
+          searchList(place.name);
+
           if (place.geometry.viewport) {
             // Only geocodes have viewport.
             bounds.union(place.geometry.viewport);
@@ -63,5 +67,14 @@ function initAutocomplete() {
         map.fitBounds(bounds);
       });
     }
+
+function searchList(searchResults) {
+  console.log(searchResults);
+
+  var li = document.createElement("li");
+  var text = document.createTextNode(searchResults);
+  li.appendChild(text);
+  document.getElementById("search-results").appendChild(li);
+}
 
 google.maps.event.addDomListener(window, 'load', initAutocomplete);
