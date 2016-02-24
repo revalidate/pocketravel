@@ -6,11 +6,10 @@ var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 var labelIndex = 0;
 
 function initAutocomplete() {
-      var map = new google.maps.Map(document.getElementById('map'), {
+      window.map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: 37.7833, lng: -122.4167},
         zoom: 13,
         scrollwheel: false
-        // mapTypeId: google.maps.MapTypeId.ROADMAP
       });
 
       // Create the search box and link it to the UI element.
@@ -71,7 +70,7 @@ function initAutocomplete() {
           });
 
           searchList(place);
-          console.log(place);
+          // console.log(place);
 
           if (place.geometry.viewport) {
             // Only geocodes have viewport.
@@ -86,36 +85,50 @@ function initAutocomplete() {
 
 
 
-function searchList(searchResults) {
+function searchList(place, map) {
   // console.log(searchResults);
   var li = document.createElement("li");
 
-  // for (var place_id in searchResults) {
-    var placeId = searchResults.place_id;
-    // console.log(placeId);
+    var placeId = place.place_id;
     li.setAttribute("id", placeId);
-  // }
 
-  var text = document.createTextNode(searchResults.name);
+  var text = document.createTextNode(place.name);
   li.appendChild(text);
   document.getElementById("search-results").appendChild(li);
 
   $(li).click(function(){
     $("#one-result").empty();
-    var oneResultText = '<h1>' + searchResults.name + '</h1>' +
-                          '<p>' + searchResults.formatted_address +
-                          '</p><p><b>Rating:</b> ' + searchResults.rating + '</p>' +
-                          '</p><p><b>Price: </b>' + searchResults.price_level + '</p>' +
-                          '<button type="button" class="btn btn-primary">Save</button>';
-    $("#one-result").append(oneResultText);
+
+    //make a request to google place details with place id
+    placeDetailsByPlaceId(place);
+
+
   });
 }
 
-// var listItem = document.querySelector("li");
-// listItem.addEventListener("click", functionName);
 
-function functionName(event){
-  console.log(event);
+function placeDetailsByPlaceId(place) {
+  // Create and send the request to obtain details for a specific place,
+  // using its Place ID.
+  var placeId = place.place_id;
+  console.log(placeId);
+
+  var request = {
+    placeId: place.place_id
+  };
+
+  service = new google.maps.places.PlacesService(window.map);
+  service.getDetails(request, function (place, status) {
+    if (status == google.maps.places.PlacesServiceStatus.OK) {
+      var oneResultText = '<h1>' + place.name + '</h1>' +
+                            '<p>' + place.formatted_address +
+                            '</p><p><b>Rating:</b> ' + place.rating + '</p>' +
+                            '</p><p><b>Price: </b>' + place.price_level + '</p>' +
+                            '</p><p><b>Website: </b>' + place.website + '</p>' +
+                            '<button type="button" class="btn btn-primary">Save</button>';
+      $("#one-result").append(oneResultText);
+    }
+  });
 }
 
 google.maps.event.addDomListener(window, 'load', initAutocomplete);
