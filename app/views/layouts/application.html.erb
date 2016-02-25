@@ -40,8 +40,9 @@
          <li class="dropdown">
            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">CITIES <span class="caret"></span></a>
            <ul class="dropdown-menu">
-             <li><a href="/cities/1">SAN FRANCISCO, CA</a></li>
-             <li><a href="/cities/2">MANHATTAN, NY</a></li>
+             <% get_cities.each do |city| %>
+               <li><%= link_to city.name, city_show_path(city) %></li>
+             <% end %>
            </ul>
          </li>
        </ul>

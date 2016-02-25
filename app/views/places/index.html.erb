@@ -1,13 +1,15 @@
-<h1>places#index</h1>
+<div class="container">
+  <h1>places#index</h1>
 
-<div>
-There are currently <%= @places.length %> places.
+  <div>
+  There are currently <%= @places.length %> places.
+  </div>
+
+  <% @places.each do |place| %>
+    <tr>
+      <td>id: <%= place.id %></td><br>
+      <td>name: <%= place.name %></td><br>
+      <td>city_id: <%= place.city_id %></td><br><br>
+      </tr>
+  <% end %>
 </div>
-
-<% @places.each do |place| %>
-  <tr>
-    <td>id: <%= place.id %></td><br>
-    <td>name: <%= place.name %></td><br>
-    <td>city_id: <%= place.city_id %></td><br><br>
-    </tr>
-<% end %>

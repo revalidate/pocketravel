@@ -1,14 +1,16 @@
-<h1>cities#index</h1>
+<div class="container">
+  <h1>cities#index</h1>
 
-<div>
-There are currently <%= @cities.length %> cities.
+  <div>
+  There are currently <%= @cities.length %> cities.
+  </div>
+
+  <% @cities.each do |city| %>
+    <tr>
+      <td>name: <%= city.name %></td><br>
+      <td>lat <%= city.lat %></td><br>
+      <td>lng: <%= city.lng %></td><br>
+      <td>radius: <%= city.radius %></td>
+      </tr>
+  <% end %>
 </div>
-
-<% @cities.each do |city| %>
-  <tr>
-    <td>name: <%= city.name %></td><br>
-    <td>lat <%= city.lat %></td><br>
-    <td>lng: <%= city.lng %></td><br>
-    <td>radius: <%= city.radius %></td>
-    </tr>
-<% end %>

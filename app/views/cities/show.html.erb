@@ -1,32 +1,34 @@
-<h1><%= @city.name %></h1>
 <div class="container">
-  <div id="search">
-    <h3>search</h3>
+  <h1><%= @city.name %></h1>
+  <div class="container">
+    <div id="search">
+      <h3>search</h3>
 
-    <!-- search box -->
-    <div class="input-group">
-      <input id="searchInput" type="text" class="form-control" placeholder="Search for...">
-    </div><!-- /input-group -->
+      <!-- search box -->
+      <div class="input-group">
+        <input id="searchInput" type="text" class="form-control" placeholder="Search for...">
+      </div><!-- /input-group -->
 
-    <!-- append search results -->
-    <ol type="A" id="search-results">
-    </ol>
+      <!-- append search results -->
+      <ol type="A" id="search-results">
+      </ol>
+    </div>
+
+    <!-- map -->
+    <div id="map" data-lat="<%= @city.lat %>" data-lng="<%= @city.lng %>" ></div>
   </div>
 
-  <!-- map -->
-  <div id="map" data-lat="<%= @city.lat %>" data-lng="<%= @city.lng %>" ></div>
-</div>
-
-<div class="container">
-  <div id="one-result">
-    <% flash.each do |name, msg| %>
-      <div class="alert <%= name == 'error' ? 'alert-danger' : 'alert-info' %>">
-        <div class="container">
-          <%= msg %>
+  <div class="container">
+    <div id="one-result">
+      <% flash.each do |name, msg| %>
+        <div class="alert <%= name == 'error' ? 'alert-danger' : 'alert-info' %>">
+          <div class="container">
+            <%= msg %>
+          </div>
         </div>
-      </div>
-    <% end %>
-  </div>
-  <div id="hiddenSave" data-url= <%= places_path(@city) %>></div>
+      <% end %>
+    </div>
+    <div id="hiddenSave" data-url= <%= places_path(@city) %>></div>
 
+  </div>
 </div>
