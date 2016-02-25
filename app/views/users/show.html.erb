@@ -12,11 +12,11 @@
 
   <br>
   <div class="dropdown">
-    <button class="btn btn-default dropdown-toggle form-control" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    <button class="btn btn-default dropdown-toggle form-control city-ref" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
       FILTER PLACE BY CITY
       <span class="caret"></span>
     </button>
-    <ul class="dropdown-menu city-picker" aria-labelledby="dropdownMenu1">
+    <ul class="dropdown-menu city-picker city-ref" aria-labelledby="dropdownMenu1">
       <% @cities.each do |city| %>
         <li data-city-id="<%=city.id%>"><a><%=city.name%></a></li>
       <% end %>
@@ -28,7 +28,7 @@
   <br>
   <div id="city_itinerary">
     <% @user.places.each do |place| %>
-      <div class="place city<%= place.city_id%>">
+      <div class="place city<%= place.city_id%> center">
         <h3><%= place.name %><h3>
         <h5><%= place.address %></h5>
         <p><b>rating: </b><% (place.rating || 0).times do %>
@@ -38,8 +38,9 @@
           <i class="fa fa-usd"></i>
         <% end %></p>
 
-        <%= link_to "Delete", place_delete_path(place.city_id, place), method: :delete, class: "btn btn-default btn-purple form-control"%>
+        <%= link_to "Delete", place_delete_path(place.city_id, place), method: :delete, class: "btn btn-default"%>
       </div>
+      <br><br>
     <% end %>
   </div>
 </div>

@@ -13,3 +13,18 @@
 .city-picker{
   width: 100%;
 }
+
+.btn.btn-default {
+  background-color: #104F61;
+  color: white;
+}
+
+.btn.btn-default:hover {
+    color: white;
+    background-color: #98A01C;
+}
+
+.btn.btn-default.city-ref {
+  background-color: #901039;
+  color: white;
+}

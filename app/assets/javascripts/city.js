@@ -134,7 +134,7 @@ function placeDetailsByPlaceId(place) {
                             '<p>' + place.opening_hours.weekday_text[4] + '</p>' +
                             '<p>' + place.opening_hours.weekday_text[5] + '</p>' +
                             '<p>' + place.opening_hours.weekday_text[6] + '</p>' +
-                            '<button type="button" class="btn btn-primary savePlace">Save</button>';
+                            '<button type="button" class="btn btn-default form-control savePlace">Save</button><br><br><br>';
       $("#one-result").append(oneResultText);
       //rails server needs to know that this is coming from a rails app and the csrf token authenticates that
       var authToken = $('meta[name=csrf-token]').attr('content');

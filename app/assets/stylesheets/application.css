@@ -42,3 +42,21 @@
 #one-result {
   text-align: center;
 }
+
+.center-text{
+  padding-top: 15%;
+}
+
+.about {
+    height: 300px;
+}
+
+nav.nav {
+  background-color: #0F2743;
+  border-color: rgba(0, 0, 0, 0.8);
+  color: white;
+}
+
+nav.navbar-default .navbar-nav>li>a, nav.navbar-default .navbar-brand {
+    color: #eee;
+}

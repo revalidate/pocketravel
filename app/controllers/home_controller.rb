@@ -1,4 +1,5 @@
 class HomeController < ApplicationController
-  def index
+  def get_cities
+    @cities = City.all
   end
 end
