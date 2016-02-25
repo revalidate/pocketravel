@@ -2,11 +2,14 @@ require 'json'
 class PlacesController < ApplicationController
 
   def index
-    @places = Place.all
+    city = City.find(params[:city_id])
+    @places = Place.where(city_id: city.id)
   end
 
   def create
+    binding.pry
     @place = current_user.places.create(place_params.merge(city_id: params[:city_id]))
+
     if @place
       render js: "window.location = '#{user_path(current_user)}'"
       flash[:notice] = "woohoo! you have successfully added #{@place.name} to your itinerary!"
