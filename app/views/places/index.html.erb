@@ -7,6 +7,7 @@ There are currently <%= @places.length %> places.
 <% @places.each do |place| %>
   <tr>
     <td>id: <%= place.id %></td><br>
-    <td>name: <%= place.name %></td><br><br>
+    <td>name: <%= place.name %></td><br>
+    <td>city_id: <%= place.city_id %></td><br><br>
     </tr>
 <% end %>
