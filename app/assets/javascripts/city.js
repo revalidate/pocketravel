@@ -6,8 +6,11 @@ var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 var labelIndex = 0;
 
 function initAutocomplete() {
+
+      var cityLocation = fetchCityCoordinates();
+
       window.map = new google.maps.Map(document.getElementById('map'), {
-        center: {lat: 37.7833, lng: -122.4167},
+        center: {lat: cityLocation.lat, lng: cityLocation.lng},
         zoom: 13,
         scrollwheel: false
       });
@@ -155,7 +158,7 @@ function placeDetailsByPlaceId(place) {
           url: formUrl,
           type: "POST",
           beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', authToken)},
-          data : { placedata: JSON.stringify(placeData) },
+          data: { placedata: placeData },
           success: function (data, textStatus, jqXHR) {
             console.log("success!");
           },
@@ -169,4 +172,13 @@ function placeDetailsByPlaceId(place) {
   });
 }
 
-google.maps.event.addDomListener(window, 'load', initAutocomplete);
+function fetchCityCoordinates() {
+  // write javascript to fetch data-lat and data-lng and stick it below with variables
+  var cityLat = $("#map").attr("data-lat");
+  var cityLng = $("#map").attr("data-lng");
+  var location = {lat: parseFloat(cityLat), lng: parseFloat(cityLng)};
+  console.log(cityLat,cityLng);
+  return location;
+}
+
+$(document).on("page:change", initAutocomplete);
