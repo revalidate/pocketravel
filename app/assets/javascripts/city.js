@@ -52,9 +52,6 @@ function initAutocomplete() {
           '<p><b>Rating:</b> ' + place.rating + '</p>' +
           '</div>';
 
-          var infowindow = new google.maps.InfoWindow({
-            content: contentString
-          });
 
           // Create a marker for each place.
           markers.push(new google.maps.Marker({
@@ -64,12 +61,13 @@ function initAutocomplete() {
             position: place.geometry.location
           }));
 
+
           markers.forEach(function(marker) {
             marker.addListener('click', function() {
-              infowindow.open(map, marker);
               map.setZoom(13);
               map.setCenter(marker.getPosition());
             });
+            attachInfoWindowContent(marker,contentString);
           });
 
           searchList(place);
@@ -169,6 +167,18 @@ function placeDetailsByPlaceId(place) {
       });
 
     }
+  });
+}
+
+// Attaches an info window to a marker with the provided message. When the
+// marker is clicked, the info window will open with the secret message.
+function attachInfoWindowContent(marker, infoWindowContent) {
+  var infowindow = new google.maps.InfoWindow({
+    content: infoWindowContent
+  });
+
+  marker.addListener('click', function() {
+    infowindow.open(marker.get('map'), marker);
   });
 }
 

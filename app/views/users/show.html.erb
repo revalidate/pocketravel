@@ -13,12 +13,14 @@
   <br>
   <div class="dropdown">
     <button class="btn btn-default dropdown-toggle form-control" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-      SAN FRANCISCO, CA, USA
+      FILTER PLACE BY CITY
       <span class="caret"></span>
     </button>
-    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-      <li><a href="#" id="sf">SAN FRANCISCO, CA, USA</a></li>
-      <li><a href="#" id="nyc">MANHATTAN, NY, USA</a></li>
+    <ul class="dropdown-menu city-picker" aria-labelledby="dropdownMenu1">
+      <% @cities.each do |city| %>
+        <li data-city-id="<%=city.id%>"><a><%=city.name%></a></li>
+      <% end %>
+      <!-- <li id="nyc"><a>MANHATTAN, NY, USA</a></li> -->
     </ul>
   </div>
 
@@ -26,17 +28,18 @@
   <br>
   <div id="city_itinerary">
     <% @user.places.each do |place| %>
-      <h3><%= place.name %><h3>
-      <h5><%= place.address %></h5>
-      <p><b>rating: </b><% (place.rating || 0).times do %>
-        <i class="fa fa-star-o"></i>
-      <% end %>
-      | <b>price level: </b><% (place.price_level || 0).times do %>
-        <i class="fa fa-usd"></i>
-      <% end %></p>
+      <div class="place city<%= place.city_id%>">
+        <h3><%= place.name %><h3>
+        <h5><%= place.address %></h5>
+        <p><b>rating: </b><% (place.rating || 0).times do %>
+          <i class="fa fa-star-o"></i>
+        <% end %>
+        | <b>price level: </b><% (place.price_level || 0).times do %>
+          <i class="fa fa-usd"></i>
+        <% end %></p>
 
-      <%= link_to "Delete", place_delete_path(place.city_id, place), method: :delete, class: "btn btn-default btn-purple form-control"%>
-
+        <%= link_to "Delete", place_delete_path(place.city_id, place), method: :delete, class: "btn btn-default btn-purple form-control"%>
+      </div>
     <% end %>
   </div>
 </div>
