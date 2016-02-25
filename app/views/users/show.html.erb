@@ -11,12 +11,12 @@
 <br>
 <div class="dropdown">
   <button class="btn btn-default dropdown-toggle form-control" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-    san francisco, ca
+    SAN FRANCISCO, CA, USA
     <span class="caret"></span>
   </button>
   <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-    <li><a href="#">san francisco</a></li>
-    <li><a href="#">manhattan, ny</a></li>
+    <li><a href="#">SAN FRANCISCO, CA, USA</a></li>
+    <li><a href="#">MANHATTAN, NY, USA</a></li>
   </ul>
 </div>
 
@@ -25,9 +25,15 @@
 <% @user.places.each do |place| %>
   <h3><%= place.name %><h3>
   <h5><%= place.address %></h5>
-  <p><b>rating: </b><%= place.rating %> | <b>price level: </b><%= place.price_level %></p>
+  <p><b>rating: </b><% (place.rating || 0).times do %>
+    <i class="fa fa-star-o"></i>
+  <% end %>
+  | <b>price level: </b><% (place.price_level || 0).times do %>
+    <i class="fa fa-usd"></i>
+  <% end %></p>
 
-  <br>
+  <%= link_to "Delete", place_delete_path(place.city_id, place), method: :delete, class: "btn btn-default btn-purple form-control"%>
+
 <% end %>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |

@@ -6,23 +6,31 @@ class PlacesController < ApplicationController
   end
 
   def create
-    places = JSON.parse(params[:placedata])
-    @place = Place.new(places)
-    @place.users << current_user
-    if @place.save!
+    @place = current_user.places.create(place_params.merge(city_id: params[:city_id]))
+    if @place
       render js: "window.location = '#{user_path(current_user)}'"
       flash[:notice] = "woohoo! you have successfully added #{@place.name} to your itinerary!"
     end
   end
 
-  # def destroy
-  #   @place = Place.find(params[:id])
-  #   if current_user == @user
-  #     @place.destroy
-  #     flash[:notice] = "Successfully deleted #{@place.name}"
-  #   else
-  #     flash[:notice] = "you suck"
-  #   end
-  # end
+  def destroy
+    @place = Place.find(params[:id])
+    @city_id = @place.city_id
+    if current_user
+      @place.destroy
+      flash[:notice] = "Successfully deleted #{@place.name}"
+      redirect_to user_path(current_user)
+    else
+      flash[:notice] = "you suck"
+      redirect_to user_path(current_user)
+    end
+  end
+
+  private
+
+  #strong params
+  def place_params
+    params.require(:placedata).permit(:name, :address, :rating, :price_level, :open_hours, :website, :place_id)
+  end
 
 end

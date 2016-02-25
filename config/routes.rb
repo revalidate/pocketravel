@@ -13,9 +13,9 @@ Rails.application.routes.draw do
   get "/cities", to: "cities#index", as: "city_index"
   get "/cities/:id", to: "cities#show", as: "city_show"
 
-  get "/cities/:id/places", to: "places#index", as: "place_index"
-  get "/cities/:id/places/:id", to: "places#show", as: "place_show"
-  post "/cities/:id/places", to: "places#create", as: "places"
-  delete "/cities/:id/places/:id", to: "places#destroy", as: "place_delete"
+  get "/cities/:city_id/places", to: "places#index", as: "place_index"
+  get "/cities/:city_id/places/:id", to: "places#show", as: "place_show"
+  post "/cities/:city_id/places", to: "places#create", as: "places"
+  delete "/cities/:city_id/places/:id", to: "places#destroy", as: "place_delete"
 
 end
