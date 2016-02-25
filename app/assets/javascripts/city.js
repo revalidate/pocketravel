@@ -6,8 +6,11 @@ var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 var labelIndex = 0;
 
 function initAutocomplete() {
+
+      var cityLocation = fetchCityCoordinates();
+
       window.map = new google.maps.Map(document.getElementById('map'), {
-        center: {lat: 37.7833, lng: -122.4167},
+        center: {lat: cityLocation.lat, lng: cityLocation.lng},
         zoom: 13,
         scrollwheel: false
       });
@@ -124,11 +127,58 @@ function placeDetailsByPlaceId(place) {
                             '<p>' + place.formatted_address +
                             '</p><p><b>Rating:</b> ' + place.rating + '</p>' +
                             '</p><p><b>Price: </b>' + place.price_level + '</p>' +
-                            '</p><p><b>Website: </b>' + place.website + '</p>' +
-                            '<button type="button" class="btn btn-primary">Save</button>';
+                            '</p><p><b>Website: </b><a href="' + place.website + '">' + place.website +  '</a></p>' +
+                            '<p><b>Open Hours: </b><br>' +
+                            '<p>' + place.opening_hours.weekday_text[0] + '</p>' +
+                            '<p>' + place.opening_hours.weekday_text[1] + '</p>' +
+                            '<p>' + place.opening_hours.weekday_text[2] + '</p>' +
+                            '<p>' + place.opening_hours.weekday_text[3] + '</p>' +
+                            '<p>' + place.opening_hours.weekday_text[4] + '</p>' +
+                            '<p>' + place.opening_hours.weekday_text[5] + '</p>' +
+                            '<p>' + place.opening_hours.weekday_text[6] + '</p>' +
+                            '<button type="button" class="btn btn-primary savePlace">Save</button>';
       $("#one-result").append(oneResultText);
+      //rails server needs to know that this is coming from a rails app and the csrf token authenticates that
+      var authToken = $('meta[name=csrf-token]').attr('content');
+
+      //posting place to profile
+      $(".savePlace").click(function(){
+        var formUrl = $("#hiddenSave").attr("data-url");
+        var placeData = {
+          name: place.name,
+          address: place.formatted_address,
+          rating: place.rating,
+          price_level: place.price_level,
+          open_hours: place.opening_hours.weekday_text,
+          website: place.website,
+          place_id: place.place_id
+        };
+
+        $.ajax({
+          url: formUrl,
+          type: "POST",
+          beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', authToken)},
+          data: { placedata: placeData },
+          success: function (data, textStatus, jqXHR) {
+            console.log("success!");
+          },
+          error: function(jqXHR, textStatus, errorThrown){
+            console.log("error");
+          }
+        });
+      });
+
     }
   });
 }
 
-google.maps.event.addDomListener(window, 'load', initAutocomplete);
+function fetchCityCoordinates() {
+  // write javascript to fetch data-lat and data-lng and stick it below with variables
+  var cityLat = $("#map").attr("data-lat");
+  var cityLng = $("#map").attr("data-lng");
+  var location = {lat: parseFloat(cityLat), lng: parseFloat(cityLng)};
+  console.log(cityLat,cityLng);
+  return location;
+}
+
+$(document).on("page:change", initAutocomplete);

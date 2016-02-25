@@ -33,4 +33,10 @@
    height: 500px;
    float: left;
    border: solid;
+   overflow-y: scroll;
+   text-align: center;
  }
+
+#one-result {
+  text-align: center;
+}

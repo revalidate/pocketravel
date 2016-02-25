@@ -1,0 +1,12 @@
+<h1>places#index</h1>
+
+<div>
+There are currently <%= @places.length %> places.
+</div>
+
+<% @places.each do |place| %>
+  <tr>
+    <td>id: <%= place.id %></td><br>
+    <td>name: <%= place.name %></td><br><br>
+    </tr>
+<% end %>

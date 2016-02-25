@@ -9,15 +9,24 @@
     </div><!-- /input-group -->
 
     <!-- append search results -->
-    <ul id="search-results">
-    </ul>
+    <ol type="A" id="search-results">
+    </ol>
   </div>
 
   <!-- map -->
-  <div id="map"></div>
+  <div id="map" data-lat="<%= @city.lat %>" data-lng="<%= @city.lng %>" ></div>
 </div>
 
 <div class="container">
   <div id="one-result">
+    <% flash.each do |name, msg| %>
+      <div class="alert <%= name == 'error' ? 'alert-danger' : 'alert-info' %>">
+        <div class="container">
+          <%= msg %>
+        </div>
+      </div>
+    <% end %>
   </div>
+  <div id="hiddenSave" data-url= <%= places_path(@city) %>></div>
+
 </div>

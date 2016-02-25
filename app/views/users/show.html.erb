@@ -1,32 +1,40 @@
-
-<p id="notice"><%= notice %></p>
+<% flash.each do |name, msg| %>
+  <div class="alert <%= name == 'error' ? 'alert-danger' : 'alert-info' %>">
+    <div class="container">
+      <%= msg %>
+    </div>
+  </div>
+<% end %>
 
 <h1><%= @user.name %>: itinerary for san francisco</h1>
 
 <br>
 <div class="dropdown">
   <button class="btn btn-default dropdown-toggle form-control" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-    san francisco, ca
+    SAN FRANCISCO, CA, USA
     <span class="caret"></span>
   </button>
   <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-    <li><a href="#">san francisco</a></li>
-    <li><a href="#">manhattan, ny</a></li>
+    <li><a href="#">SAN FRANCISCO, CA, USA</a></li>
+    <li><a href="#">MANHATTAN, NY, USA</a></li>
   </ul>
 </div>
 
 <br>
 <br>
-<h3>Blue Bottle Cafe<h3>
-<h5>1 Ferry Bldg, Ste 7, San Francisco, CA 94111</h5>
-<h5>Embarcadero</h5>
-<p>Located inside one of San Francisco’s most recognizable landmarks, this café consists of two coffee bars: The first, located in the main arcade, pulls Hayes Valley Espresso. The north (or “secret”) coffee bar is tucked away around the corner in a side entrance and rotates its espresso offerings between Hayes Valley Espresso and an occasional featured blend or single origin. On both sides, we craft pour-over coffee individually on drip bars of our own design.</p>
+<% @user.places.each do |place| %>
+  <h3><%= place.name %><h3>
+  <h5><%= place.address %></h5>
+  <p><b>rating: </b><% (place.rating || 0).times do %>
+    <i class="fa fa-star-o"></i>
+  <% end %>
+  | <b>price level: </b><% (place.price_level || 0).times do %>
+    <i class="fa fa-usd"></i>
+  <% end %></p>
 
-<br>
-<h3>Philz Coffee<h3>
-<h5>1 Front St, Ste 100, San Francisco, CA 94111</h5>
-<h5>Financial District</h5>
-<p>We brew every cup “One Cup at a Time", crafting a perfect cup to every individual customer’s taste. You won’t find any lattes, cappuccinos, espressos, or pre-brews. Instead, you'll find over 20 customized blends made from high quality beans from around the world.</p>
+  <%= link_to "Delete", place_delete_path(place.city_id, place), method: :delete, class: "btn btn-default btn-purple form-control"%>
+
+<% end %>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>

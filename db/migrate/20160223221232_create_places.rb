@@ -8,7 +8,7 @@ class CreatePlaces < ActiveRecord::Migration
       t.string :open_hours
       t.string :website
       t.string :photos
-      t.integer :place_id
+      t.string :place_id
       t.integer :city_id
 
       t.timestamps null: false
