@@ -7,8 +7,13 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_CRp4ht6OFPUChKJC91IF-5uGHCAcRo8&libraries=places"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-  <!--Import jQuery before materialize.js-->
-  <!-- <script type="text/javascript" src="/assets/javascripts/materialize.js"></script> -->
+
+  <!--Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!--Import Google Icon Font-->
+  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
 
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
@@ -20,22 +25,27 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
   <link href="http://www.gardenspotvillagemarathon.org/assets/img/ui/address_icon.png" rel="icon">
 
-
-  <!--Import Google Icon Font-->
-  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <!--Import materialize.css-->
-  <link type="text/css" rel="stylesheet" href="/assets/stylesheets/materialize.css"  media="screen,projection"/>
-
-  <!--Let browser know website is optimized for mobile-->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
 </head>
 <body>
 
-  #Navigation Bar
-    <nav class="nav navbar navbar-default navbar-fixed-top">
-     <div class="container-fluid">
-       <!-- Brand and toggle get grouped for better mobile display -->
+  <!-- #Navigation Bar -->
+
+  <nav class="nav navbar navbar-default navbar-fixed-top">
+   <div class="container-fluid">
+     <!-- Brand and toggle get grouped for better mobile display -->
+
+     <!-- Collect the nav links, forms, and other content for toggling -->
+     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+         <li class="dropdown">
+           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">CITIES <span class="caret"></span></a>
+           <ul class="dropdown-menu">
+             <li><a href="/cities/1">SAN FRANCISCO, CA</a></li>
+             <li><a href="/cities/2">MANHATTAN, NY</a></li>
+           </ul>
+         </li>
+       </ul>
+
        <div class="navbar-header">
          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
            <span class="sr-only">Toggle navigation</span>
@@ -46,36 +56,24 @@
          <a class="navbar-brand brand" href="/">pocketravel</a>
        </div>
 
-       <!-- Collect the nav links, forms, and other content for toggling -->
-       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav">
-           <li class="dropdown">
-             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">CITIES <span class="caret"></span></a>
-             <ul class="dropdown-menu">
-               <li><a href="/cities/1">SAN FRANCISCO, CA</a></li>
-               <li><a href="/cities/2">MANHATTAN, NY</a></li>
-             </ul>
-           </li>
-         </ul>
+       <ul class="nav navbar-nav navbar-right">
+         <% if current_user %>
+            <li><%= link_to "PROFILE", user_path(current_user) %></li>
+            <li><%= link_to "LOGOUT", logout_path %></li>
+         <% else %>
+            <li><%= link_to "SIGN UP", new_user_path %></li>
+            <li><%= link_to "LOG IN", login_path %></li>
+         <% end %>
+         <li><a href="#contact">CONTACT</a></li>
+       </ul>
+     </div><!-- /.navbar-collapse -->
+   </div><!-- /.container-fluid -->
+  </nav>
 
-         <ul class="nav navbar-nav navbar-right">
-           <% if current_user %>
-              <li><%= link_to "PROFILE", user_path(current_user) %></li>
-              <li><%= link_to "LOGOUT", logout_path %></li>
-           <% else %>
-              <li><%= link_to "SIGN UP", new_user_path %></li>
-              <li><%= link_to "LOG IN", login_path %></li>
-           <% end %>
-           <li><a href="#contact">CONTACT</a></li>
-         </ul>
-       </div><!-- /.navbar-collapse -->
-     </div><!-- /.container-fluid -->
-    </nav>
 
-  <div class="container">
-    <hr>
     <%= yield %>
-  </div>
+
+
 
 </body>
 </html>
