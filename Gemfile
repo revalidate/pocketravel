@@ -29,6 +29,11 @@ gem 'bcrypt', '~> 3.1.7'
 #Materialize Gem
 gem 'materialize-sass'
 
+#for heroku deployment
+group :production do
+  gem 'rails_12factor'
+end
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
