@@ -7,7 +7,6 @@ class PlacesController < ApplicationController
   end
 
   def create
-    binding.pry
     @place = current_user.places.create(place_params.merge(city_id: params[:city_id]))
 
     if @place
