@@ -51,12 +51,52 @@
     height: 300px;
 }
 
-nav.nav {
-  background-color: #0F2743;
-  border-color: rgba(0, 0, 0, 0.8);
-  color: white;
+
+.navbar-default {
+  font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+  -webkit-transition: all 0.35s;
+  -moz-transition: all 0.35s;
+  transition: all 0.35s;
+}
+.navbar-default .navbar-header .navbar-brand {
+  font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 700;
+  font-size: 25px;
+  text-transform: uppercase;
 }
 
-nav.navbar-default .navbar-nav>li>a, nav.navbar-default .navbar-brand {
-    color: #eee;
-}
+@media (min-width: 768px) {
+  .navbar-default {
+    background-color: transparent;
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+  .navbar-default .navbar-header .navbar-brand {
+    color: rgba(255, 255, 255, 0.7);
+  }
+  .navbar-default .navbar-header .navbar-brand:hover {
+    color: white;
+  }
+  nav.navbar-default .nav > li > a {
+    color: rgba(255, 255, 255, .9);
+    font-weight: 700;
+    font-size: 15px;
+  }
+  nav.navbar-default .nav > li > a:hover{
+    color: white;
+  }
+  nav.nav {
+    background-color: #0F2743;
+  }
+  .navbar-default.affix .navbar-header .navbar-brand {
+    color: #f05f40;
+    font-size: 14px;
+  }
+  .navbar-default.affix .navbar-header .navbar-brand:hover{
+    color: #eb3812;
+  }
+  .navbar-default.affix .nav > li > a{
+    color: #222222;
+  }
+  .navbar-default.affix .nav > li > a:hover{
+    color: #f05f40;
+  }
